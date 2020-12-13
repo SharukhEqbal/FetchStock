@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Stock Market</title>
+    <meta-charset='utf-8'>
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}"/>
+</head>
+<body>
+<h1>Welcome to Stock Market</h1>
+    {{ insert_message }}<br>
+     <div class="stocks">
+         {% if price_record %}
+         <table>
+             <thead>
+             <th>StockName</th>
+             <th>CurrentPrice</th>
+             <th>52WeekHighPrice</th>
+             <th>52WeekLowPrice</th>
+             </thead>
+             {% for stock in price_record %}
+             <tr>
+                 <td>{{ stock.stock_name }}</td>
+                 <td>{{ stock.current_price }}</td>
+                 <td>{{ stock.max_price }}</td>
+                 <td>{{ stock.min_price }}</td>
+             </tr>
+             {% endfor %}
+         </table>
+         {% else %}
+         <p> No Stock Records </p>
+         {% endif %}
+
+     </div>
+    <img src="{% static 'images/stock_market.jpg' %}" alt="Image didn't show up!">
+</body>
+</html>
