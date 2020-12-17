@@ -1,0 +1,19 @@
+h1{
+    color: blue;
+}
+table, th, td{
+    border: 2px solid black;
+    margin: 25px 0;
+    font-size: 1.0em;
+    min-width: 400px;
+    font-color: black;
+    text-align: center;
+}
+
+thead, tr{
+	background-color: #009879;
+	color: #ffffff;
+	text-align:center;
+	font-weight: bold;
+	font-color: black;
+}

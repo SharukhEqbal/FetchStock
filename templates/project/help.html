@@ -3,7 +3,17 @@
     <title>Stock Market Help Page</title>
 </head>
 <body>
-<h1>Welcome to Help Page</h1>
-    Let us know your query at {{ email_id }}<br>
+     <div class="jumbotron">
+        <div id="right">
+            <form class="form-group" action="{% url 'project:index' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary" value="Back">
+                <br>
+            </form>
+        </div>
+        <h1>Welcome to Help Page</h1>
+        Let us know your query at {{ email_id }}<br>
+     </div>
+    </div>
 </body>
 </html>

@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.conf.urls import url
 from project import views
 
+app_name = 'project'
+
 urlpatterns = [
     url(r'^view_stock', views.view_stock, name='view_stock'),
     url(r'^$', views.index, name='index'),

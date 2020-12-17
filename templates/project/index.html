@@ -10,31 +10,65 @@
 </head>
 <body>
 <div class='jumbotron'>
-<h1>Welcome to Stock Market</h1>
+    <div id="right">
+    <form class="form-group" action="{% url 'project:help' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Help">
+        <br>
+    </form>
+
+    <div id="left">
+    <form class="form-group" action="{% url 'project:view_stock' %}" method="post">
+        {{form}}
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="submit">
+        <br>
+    </form>
+    </div>
+
+    <h1 class="h3"> <strong>Welcome to Stock Market</strong></h1>
     {{ insert_message }}<br>
-     <div class="stocks">
-         {% if price_record %}
-         <table>
+     <div class="jumbotron">
+         {% if dict1 %}
+         <table class="table table-striped table-bordered" >
              <thead>
-             <th>StockName</th>
-             <th>CurrentPrice</th>
-             <th>52WeekHighPrice</th>
-             <th>52WeekLowPrice</th>
+             <th scope="col">StockCode</th>
+             <th scope="col">StockName</th>
+             <th scope="col">CurrentPrice</th>
+             <th scope="col">52 Week High Price</th>
+             <th scope="col">52 Week Low Price</th>
              </thead>
-             {% for stock in price_record %}
+             {% for stock in dict2 %}
              <tr>
+                 <td>{{ stock.stock_code }}</td>
                  <td>{{ stock.stock_name }}</td>
-                 <td>{{ stock.current_price }}</td>
-                 <td>{{ stock.max_price }}</td>
-                 <td>{{ stock.min_price }}</td>
+                 <td>{{ stock.Current_price }}</td>
+                 <td>{{ stock.Max_price }}</td>
+                 <td>{{ stock.Min_price }}</td>
              </tr>
              {% endfor %}
          </table>
          {% else %}
          <p> No Stock Records </p>
          {% endif %}
-
      </div>
+    <div class="jumbotron">
+        <h2 class="h3"> <strong>Don't know the Stock Code? No Worry we have listed top 30 NSE Stocks for you.</strong> </h2>
+         <table class="table table-striped table-bordered">
+             <thead class="thead-dark">
+             <th scope="col">StockCode</th>
+             <th scope="col">StockName</th>
+             </thead>
+             <tbody table-striped>
+             {% for stock in dict3.stock_record %}
+             <tr>
+                 <td>{{ stock.stock_name }}</td>
+                 <td>{{ stock.code }}</td>
+             </tr>
+             {% endfor %}
+             </tbody>
+         </table>
+    </div>
     <!--<img src="{% static 'images/stock_market.jpg' %}" alt="Image didn't show up!"> -->
 </div>
 </body>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from project.models import Stock, Price, DateRecord
+from project.models import Stock, Price, DateRecord, StockCode
 
 # Register your models here.
 
@@ -8,3 +8,4 @@ from project.models import Stock, Price, DateRecord
 admin.site.register(Stock)
 admin.site.register(Price)
 admin.site.register(DateRecord)
+admin.site.register(StockCode)
