@@ -37,7 +37,10 @@ def index(request):
         print(request.method)
         # return render(request, 'project/stock_page.html', context=stock)
         if stock['current_price']:
-            return render(request, 'project/stock_page.html', context=stock)
+            #return render(request, 'project/stock_page.html', context=stock)
+            return render(request, 'project/index.html', {'dict1': price_dict, 'dict2': final_list, 'dict3': stock_dict,
+                                                          'form': form, 'not_found': False, 'flag': flag,
+                                                          'stock': stock})
         else:
             return render(request, 'project/index.html', {'dict1': price_dict, 'dict2': final_list, 'dict3': stock_dict,
                                                           'form': form, 'not_found': True, 'flag': flag})
