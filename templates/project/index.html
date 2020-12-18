@@ -26,15 +26,16 @@
     <div class='jumbotron'>
         <h1 text-align="center"> <strong>Welcome to Stock Market</strong></h1>
 
+	<h5><strong>Search by stock Name<strong><br>
         <form class="form-group" width="100%" method="post">
             {{form}}
             {% csrf_token %}
             <input type="submit" class="btn btn-primary" value="submit">
             <br>
         </form>
-
+        </h5>
         {% if not_found %}
-            <script>alert('No Stock Found')</script>
+            <script>alert('Sorry the stock code is not found')</script>
          {% endif %}
 
         {% if flag == 'index' %}
