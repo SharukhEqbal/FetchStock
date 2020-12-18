@@ -55,7 +55,7 @@ def stock_detail(stock_name):
     stock_dict = {}
 
     yahoo_financial = YahooFinancials(stock_name)
-    current_price = yahoo_financial.get_Current_price()
+    current_price = yahoo_financial.get_current_price()
     fifty_two_week_high_value = yahoo_financial.get_yearly_high()
     fifty_two_week_low_value = yahoo_financial.get_yearly_low()
 
