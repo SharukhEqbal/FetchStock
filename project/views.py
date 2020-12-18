@@ -4,6 +4,7 @@ from yahoofinancials import YahooFinancials
 from project.models import Stock, Price, DateRecord, StockCode
 from .forms import FormName
 
+
 # Create your views here.
 
 
@@ -26,9 +27,25 @@ def index(request):
                 stock_data['stock_name'] = stock_c.code
         final_list.append(stock_data)
     print(final_list)
+
+    flag = 'index'
+    if request.method == 'POST':
+        flag = 'view'
+        stock_name = request.POST['stock_name']
+        stock = stock_detail(stock_name)
+        print(stock['current_price'])
+        print(request.method)
+        # return render(request, 'project/stock_page.html', context=stock)
+        if stock['current_price']:
+            return render(request, 'project/stock_page.html', context=stock)
+        else:
+            return render(request, 'project/index.html', {'dict1': price_dict, 'dict2': final_list, 'dict3': stock_dict,
+                                                          'form': form, 'not_found': True, 'flag': flag})
+    else:
+        return render(request, 'project/index.html', {'dict1': price_dict, 'dict2': final_list, 'dict3': stock_dict,
+                                                      'form': form, 'flag': flag})
+
     # return render(request, 'project/index.html', context=price_dict)
-    return render(request, 'project/index.html', {'dict1': price_dict, 'dict2': final_list, 'dict3': stock_dict,
-                                                  'form': form})
 
 
 def stock_detail(stock_name):
@@ -50,10 +67,13 @@ def view_stock(request):
     if request.method == 'POST':
         stock_name = request.POST['stock_name']
     stock = stock_detail(stock_name)
+    not_found = True
+    print(stock.current_price)
+    print(request.method)
     return render(request, 'project/stock_page.html', context=stock)
-    #if stock['current_price']:
+    # if stock['current_price']:
     #    return render(request, 'project/stock_page.html', {'stock_detail': stock, 'message': 'Data Available'})
-    #else:
+    # else:
     #    return render(request, 'project/index.html', {'message': 'No Data'})
 
 
@@ -66,11 +86,11 @@ def form_name_view(request):
     form = FormName()
     stocks = []
     tcs_stock = stock_detail('TCS.NS')
-    #principal_stock = stock_detail('PFG')
-    #icici_stock = stock_detail('ICICIBANK.NS')
+    # principal_stock = stock_detail('PFG')
+    # icici_stock = stock_detail('ICICIBANK.NS')
     stocks.append(tcs_stock)
-    #stocks.append(principal_stock)
-    #stocks.append(icici_stock)
+    # stocks.append(principal_stock)
+    # stocks.append(icici_stock)
 
     print(stocks)
     if request.method == 'POST':
@@ -79,8 +99,8 @@ def form_name_view(request):
             # DO SOMETHING CODE
             print("VALIDATION SUCCESSFUL")
             print("Stock Name: " + form.cleaned_data['stock_name'])
-            #stock_name = request.POST['stock_name']
+            # stock_name = request.POST['stock_name']
             # return render(request, 'project/stock_page.html', context=stock_detail(stock_name))
-            #return redirect('project/stock_page.html', context=stock_detail(stock_name))
-    #else:
+            # return redirect('project/stock_page.html', context=stock_detail(stock_name))
+    # else:
     return render(request, 'project/form_page.html', {'form': form, 'stocks': stocks})

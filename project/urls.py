@@ -8,6 +8,7 @@ app_name = 'project'
 urlpatterns = [
     url(r'^view_stock', views.view_stock, name='view_stock'),
     url(r'^$', views.index, name='index'),
+    url(r'^index', views.index, name='index'),
     url(r'^help', views.help_page, name='help'),
-    url(r'stock_detail/', views.form_name_view, name='stock_detail')
+    # url(r'stock_detail/', views.form_name_view, name='stock_detail')
 ]
